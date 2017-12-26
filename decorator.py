@@ -47,6 +47,6 @@ choose=input("请选择登录方式:qq or weixin:")
 if choose=="qq":
    home()
 elif choose=="weixin":
-    bbs()
+    bbs() 
 #print(home())#没有返回值，因为warpper()也没返回值，需要加return
 
