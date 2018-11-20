@@ -3,14 +3,14 @@
 # @Author  : Puhao
 # @File    : spider.py
 # @Software: PyCharm
-#===========================µ¼ÈëÏàÓ¦µÄ¿â.Ã¨ÑÛµçÓ°top100
+#===========================ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó¦ï¿½Ä¿ï¿½.Ã¨ï¿½Ûµï¿½Ó°top100
 import requests
 import urllib.request
 import re
 from multiprocessing import Pool
 import json
 from requests.exceptions import RequestException
-#=========================¶¨ÒåÇëÇó
+#=========================ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 def get_onepage(url):
     try:
         respose = urllib.request.urlopen(url)
@@ -18,21 +18,21 @@ def get_onepage(url):
         return respo
     except RequestException:
         return None
-#=========================Ö÷·½·¨
+#=========================ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 def main(page):
     url = "http://maoyan.com/board/4?offset=" + str(page)
     html = get_onepage(url)
     for item in parse_onepge(html):
         print(item)
         write_txt(item)
-==========×¢ÊÍ r.S
-'''re.I£ººöÂÔ´óÐ¡Ð´
-re.L£º±íÊ¾ÌØÊâ×Ö·û¼¯ \w, \W, \b, \B, \s, \S ÒÀÀµÓÚµ±Ç°»·¾³
-re.M£º¶àÐÐÄ£Ê½
-re.S£º' . '²¢ÇÒ°üÀ¨»»ÐÐ·ûÔÚÄÚµÄÈÎÒâ×Ö·û£¨×¢Òâ£º' . '²»°üÀ¨»»ÐÐ·û£© .html´æÔÚÐÐ
-re.U£º ±íÊ¾ÌØÊâ×Ö·û¼¯ \w, \W, \b, \B, \d, \D, \s, \S ÒÀÀµÓÚ Unicode ×Ö·ûÊôÐÔÊý¾Ý¿â'''
-# Ò»ÏÂ·Ö²¼Æ¥Åä ÅÅÃû£¬Í¼Æ¬ £¬±êÌâ£¬Ö÷ÑÝ£¬ÉÏÓ³Ê±¼ä£¬ÆÀ·Ö
-#=====================ÕýÔòÆ¥Åä
+
+'''re.Iï¿½ï¿½ï¿½ï¿½ï¿½Ô´ï¿½Ð¡Ð´
+re.Lï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ \w, \W, \b, \B, \s, \S ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Ç°ï¿½ï¿½ï¿½ï¿½
+re.Mï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä£Ê½
+re.Sï¿½ï¿½' . 'ï¿½ï¿½ï¿½Ò°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½×¢ï¿½â£º' . 'ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ð·ï¿½ï¿½ï¿½ .htmlï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+re.Uï¿½ï¿½ ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ \w, \W, \b, \B, \d, \D, \s, \S ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Unicode ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ý¿ï¿½'''
+# Ò»ï¿½Â·Ö²ï¿½Æ¥ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼Æ¬ ï¿½ï¿½ï¿½ï¿½ï¿½â£¬ï¿½ï¿½ï¿½Ý£ï¿½ï¿½ï¿½Ó³Ê±ï¿½ä£¬ï¿½ï¿½ï¿½ï¿½
+#=====================ï¿½ï¿½ï¿½ï¿½Æ¥ï¿½ï¿½
 def parse_onepge(html):
     pattern = re.compile(
         '<dd>.*?board-index.*?>(\d+)</i>.*?data-src="(.*?)".*?title="(.*?)".*?star">(.*?)</p>.*?releasetime">(.*?)</p>.*?integer">(.*?)</i>.*?fraction">(.*?)</i>',
@@ -47,12 +47,12 @@ def parse_onepge(html):
             'time': item[4],
             'score': item[5] + item[6]
         }
-#=====================Ð´ÈëÎÄ¼þ
+#=====================Ð´ï¿½ï¿½ï¿½Ä¼ï¿½
 def write_txt(content):
     with open('result.txt', 'a', encoding='utf-8') as f:
         f.write(json.dumps(content, ensure_ascii=False) + "\n")
         f.close()
-#============Ïß³Ì³ØÖ´ÐÐ
+#============ï¿½ß³Ì³ï¿½Ö´ï¿½ï¿½
 if __name__ == '__main__':
     pool = Pool()
     pool.map(main, [i * 10 for i in range(10)])
