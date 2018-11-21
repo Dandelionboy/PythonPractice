@@ -15,6 +15,7 @@ search_tv=browser.find_element_by_id("key")
 search_tv.send_keys("美食")
 btn_search=browser.find_element_by_class_name("button")
 btn_search.click()
+browser.execute_script('window.scrollTo(0, document.body.scrollHeight)')
 
 
 
