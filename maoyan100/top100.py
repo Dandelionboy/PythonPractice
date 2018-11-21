@@ -3,8 +3,10 @@
 # @Author  : Puhao
 # @File    : spider.py
 # @Software: PyCharm
-
+import os
+from _md5 import md5
 from multiprocessing.pool import Pool
+from pathlib import Path
 
 import requests
 from requests.exceptions import RequestException
@@ -29,9 +31,13 @@ def get_onepage(url):
 def main(page):
     url = "http://maoyan.com/board/4?offset=" + str(page)
     html = get_onepage(url)
+    dir=create_dir("image")
     for item in parse_onepge(html):
         print(item)
+        # 保存到文件
         write_txt(item)
+        # 下载文件
+        down_image(dir,item['image'])
 
 
 def parse_onepge(html):
@@ -54,6 +60,33 @@ def write_txt(content):
     with open('result.txt', 'a', encoding='utf-8') as f:
         f.write(json.dumps(content, ensure_ascii=False) + "\n")
         f.close()
+
+
+def create_dir(name):
+    # 在当前位置创建一个dir，或者自己制定'D:\spider\jiepai
+    dir = Path(name)
+    if not dir.exists():
+        dir.mkdir()
+    return dir
+
+
+def down_image(save_dir, url):
+    print("正在下载" + url)
+    try:
+        res = requests.get(url)
+        if res.status_code == 200:
+            save_image(save_dir, res.content)
+        return None
+
+    except:
+        print("下载异常")
+
+
+def save_image(dir, content):
+    file_path = '{0}/{1}.{2}'.format(dir, md5(content).hexdigest(), 'jpg')
+    if not os.path.exists(file_path):
+        with open(file_path, 'wb') as f:
+            f.write(content)
 
 
 if __name__ == '__main__':
