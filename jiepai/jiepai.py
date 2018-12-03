@@ -92,8 +92,5 @@ def parse_page_detail(html, url):
     #     # except:
     #     #     print("图片url出错")
 
-
-
-
 if __name__ == '__main__':
     main()
