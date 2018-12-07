@@ -42,6 +42,5 @@ def main():
         print("page"+str(i))
         parse_page(i)
 
-
 if __name__ == '__main__':
     main()
