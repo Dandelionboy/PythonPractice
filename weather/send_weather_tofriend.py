@@ -1,10 +1,9 @@
 import requests
 import json
 import itchat
-import datetime
-from lxml import etree
+
 from apscheduler.schedulers.blocking import BlockingScheduler  # 定时框架
-from apscheduler.schedulers.background import BackgroundScheduler
+
 
 def get_weather():
     # 成都市的天气
@@ -50,7 +49,6 @@ def send_tofriend(info):
     #     if item['RemarkName'] == NickName:  # 由于每次登录时朋友的UserName都会变，所以我们这样做
     #         user = item['UserName']  # 获取微信朋友的UserName
     itchat.send("天气预报:\n" + info[0] + info[1] + info[2], toUserName=NickName)
-    itchat.run()
 
 
 def method_main():
@@ -60,6 +58,8 @@ def method_main():
 
 if __name__ == '__main__':
     itchat.auto_login(hotReload=True)  # enableCmdQR=True, 可以在登陆的时候使用命令行显示二维码
-    sched = BackgroundScheduler()
+    sched = BlockingScheduler()
     sched.add_job(method_main, 'interval', seconds=30)
+    #sched.add_job(method_main, 'cron', month='1-12', day='1-31', hour=7, minute=30)
     sched.start()
+    itchat.run()
