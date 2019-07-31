@@ -8,7 +8,6 @@ def parse_page(page):
     try:
         response = requests.get(url.format(page))
         if response.status_code == 200:
-
             text = response.text
             titles = re.findall(r'<div class="sons">.*?<b>(.*?)</b>', text, re.DOTALL)
             caodai = re.findall(r'<p class="source"><a.*?>(.*?)</a>', text, re.DOTALL)

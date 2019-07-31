@@ -60,6 +60,6 @@ if __name__ == '__main__':
     itchat.auto_login(hotReload=True)  # enableCmdQR=True, 可以在登陆的时候使用命令行显示二维码
     sched = BlockingScheduler()
     sched.add_job(method_main, 'interval', seconds=30)
-    #sched.add_job(method_main, 'cron', month='1-12', day='1-31', hour=7, minute=30)
+    # sched.add_job(method_main, 'cron', month='1-12', day='1-31', hour=7, minute=30)
     sched.start()
     itchat.run()
